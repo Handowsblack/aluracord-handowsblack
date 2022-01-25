@@ -1,36 +1,8 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
 import { SiGithub } from 'react-icons/si';
-
-function GlobalStyle() {
-    return (
-        <style global jsx>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          list-style: none;
-        }
-        body {
-          font-family: 'Open Sans', sans-serif;
-        }
-        /* App fit Height */ 
-        html, body, #__next {
-          min-height: 100vh;
-          display: flex;
-          flex: 1;
-        }
-        #__next {
-          flex: 1;
-        }
-        #__next > * {
-          flex: 1;
-        }
-        /* ./App fit Height */ 
-      `}</style>
-    );
-}
-
+import React from 'react';
+import { useRouter } from 'next/router';
 
 function Title(props) {
     const Tag = props.tag || 'h1';
@@ -48,26 +20,15 @@ function Title(props) {
     );
 }
 
-//function HomePage() {
-//
-//   return (
-//        <div>
-//            <GlobalStyle />
-//            <Title tag="h2">Bem vindo de volta!</Title>
-//            <h2>Discord - Handowsblack#9945</h2>
-//
-//        </div>
-//    )
-//}
-
-//export default HomePage
-
 export default function PaginaInicial() {
-    const username = 'Handowsblack';
+    //  const username = 'Handowsblack';
+    const [username, setUsername] = React.useState('Handowsblack');
+    const [location, setLocation] = React.useState('Goiânia - Brazil');
+    const roteamento = useRouter();
+
 
     return (
         <>
-            <GlobalStyle />
             <Box
                 styleSheet={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -94,6 +55,11 @@ export default function PaginaInicial() {
                     {/* Formulário */}
                     <Box
                         as="form"
+                        onSubmit={function (infosDoEvento) {
+                            infosDoEvento.preventDefault();
+                            console.log('Alguém submeteu o form do chat');
+                            roteamento.push('/chat');
+                        }}
                         styleSheet={{
                             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                             width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -105,7 +71,14 @@ export default function PaginaInicial() {
                         </Text>
 
                         <TextField
+                            value={username}
+                            onChange={function (event) {
+                                console.log('usuario digitou', event.target.value);
+                                const valor = event.target.value;
+                                setUsername(valor);
+                            }}
                             fullWidth
+                            placeholder='Digite seu usuário Github'
                             textFieldColors={{
                                 neutral: {
                                     textColor: appConfig.theme.colors.neutrals[200],
@@ -118,6 +91,7 @@ export default function PaginaInicial() {
                         <Button
                             type='submit'
                             label='Entrar'
+                            disabled={username < 3}
                             fullWidth
                             buttonColors={{
                                 contrastColor: appConfig.theme.colors.neutrals["000"],
@@ -130,7 +104,7 @@ export default function PaginaInicial() {
                     {/* Formulário */}
 
 
-                    {/*Area da Foto*/}
+                    {/*Área da Foto*/}
                     <Box
                         styleSheet={{
                             display: 'flex',
@@ -151,7 +125,7 @@ export default function PaginaInicial() {
                                 borderRadius: '50%',
                                 marginBottom: '16px',
                             }}
-                            src={`https://github.com/${username}.png`}
+                            src={username.length > 2 ? `https://github.com/${username}.png` : "https://cdn.icon-icons.com/icons2/790/PNG/512/github_icon-icons.com_65450.png"}
                         />
                         <Text
                             variant="body4"
@@ -164,12 +138,12 @@ export default function PaginaInicial() {
                             }}
                         >
                             <div style={{ display: "flex", justifyContent: "center" }}>
-                                <SiGithub />
-                                <span>&nbsp; {username}</span>
+                                <SiGithub /> 
+                                <span>&nbsp;{username}</span>
                             </div>
                         </Text>
                     </Box>
-                    {/*Area da Foto*/}
+                    {/*Área da Foto*/}
                 </Box>
             </Box>
         </>
