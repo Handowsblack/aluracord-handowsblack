@@ -1,6 +1,6 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
-import { SiGithub } from 'react-icons/Si';
+import { SiGithub } from 'react-icons/si';
 
 function GlobalStyle() {
     return (
