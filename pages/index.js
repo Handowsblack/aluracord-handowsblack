@@ -1,6 +1,6 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
-import { GoMarkGithub } from 'react-icons/Go';
+import { SiGithub } from 'react-icons/Si';
 
 function GlobalStyle() {
     return (
@@ -164,7 +164,7 @@ export default function PaginaInicial() {
                             }}
                         >
                             <div style={{ display: "flex", justifyContent: "center" }}>
-                                <GoMarkGithub />
+                                <SiGithub />
                                 <span>&nbsp; {username}</span>
                             </div>
                         </Text>
