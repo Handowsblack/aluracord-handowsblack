@@ -1,5 +1,6 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
+import { GoMarkGithub } from 'react-icons/Go';
 
 function GlobalStyle() {
     return (
@@ -129,7 +130,7 @@ export default function PaginaInicial() {
                     {/* Formulário */}
 
 
-                    {/* Photo Area */}
+                    {/*Area da Foto*/}
                     <Box
                         styleSheet={{
                             display: 'flex',
@@ -157,14 +158,18 @@ export default function PaginaInicial() {
                             styleSheet={{
                                 color: appConfig.theme.colors.neutrals[200],
                                 backgroundColor: appConfig.theme.colors.neutrals[900],
-                                padding: '3px 10px',
+                                padding: '3px 10px 2px 10px',
                                 borderRadius: '1000px'
+
                             }}
                         >
-                            {username}
+                            <div style={{ display: "flex", justifyContent: "center" }}>
+                                <GoMarkGithub />
+                                <span>&nbsp; {username}</span>
+                            </div>
                         </Text>
                     </Box>
-                    {/* Photo Area */}
+                    {/*Area da Foto*/}
                 </Box>
             </Box>
         </>
